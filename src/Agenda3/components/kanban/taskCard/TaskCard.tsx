@@ -7,6 +7,7 @@ import { VscDebugConsole } from 'react-icons/vsc'
 
 import { minutesToHHmm } from '@/Agenda3/helpers/fullCalendar'
 import { navToLogseqBlock } from '@/Agenda3/helpers/logseq'
+import { selectTaskColor } from '@/Agenda3/helpers/util'
 import useAgendaEntities from '@/Agenda3/hooks/useAgendaEntities'
 import { logseqAtom } from '@/Agenda3/models/logseq'
 import { settingsAtom } from '@/Agenda3/models/settings'
@@ -73,7 +74,7 @@ const TaskCard = ({ task }: { task: AgendaTaskWithStartOrDeadline }) => {
         id: task.id,
         title: task.showTitle,
         duration: minutesToHHmm(estimatedTime),
-        color: groupType === 'page' ? task.project.bgColor : task?.filters?.[0]?.color,
+        color: selectTaskColor(groupType, task),
       })}
       data-id={task.id}
     >
