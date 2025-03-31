@@ -400,12 +400,14 @@ export const transformTasksToKanbanTasks = (
       // splitting multi-days task into single-day tasks
       if (allDay && end && start) {
         const days = genDays(start, end)
+        const multiDayStart = start
         return days.map((day) => {
           const isPast = day.isBefore(today, 'day')
           const isEndDay = day.isSame(end, 'day')
           return {
             ...task,
             start: day,
+            multiDayStart,
             // filtered: true,
             // 过去且不是结束日期的任务默认为已完成
             status: (isPast && !isEndDay) || task.status === 'done' ? 'done' : 'todo',

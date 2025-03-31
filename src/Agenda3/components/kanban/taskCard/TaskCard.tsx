@@ -18,6 +18,7 @@ import { cn } from '@/util/util'
 
 import Group from '../../Group'
 import TaskModal from '../../modals/TaskModal'
+import s from '../kanban.module.less'
 import Toolbar from './Toolbar'
 
 const TaskCard = ({ task }: { task: AgendaTaskWithStartOrDeadline }) => {
@@ -68,6 +69,7 @@ const TaskCard = ({ task }: { task: AgendaTaskWithStartOrDeadline }) => {
           'bg-[#edeef0] opacity-80 dark:bg-[#2f2f33]': task.status === 'done',
           // 循环任务及多天任务不能拖拽
           'droppable-task-element': !editDisabled && !isMultipleDays && !noStart,
+          [s.multidayTaskElement]: isMultipleDays,
         },
       )}
       data-event={JSON.stringify({
